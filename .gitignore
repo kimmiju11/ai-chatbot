@@ -1,0 +1,5 @@
+# .gitignore
+.env
+ai-env
+vector
+__pycache__
