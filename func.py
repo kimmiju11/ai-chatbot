@@ -25,14 +25,9 @@ def llmSet():
     return llm
 
 def embeddingSet():
-    load_dotenv(dotenv_path="../.env")
-    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
     # langchain-aws를 사용하여 embedding 생성
     bedrock_embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v2:0",
-                                           region_name="ap-northeast-2",
-                                           aws_access_key_id=AWS_ACCESS_KEY_ID,
-                                           aws_secret_access_key=AWS_SECRET_ACCESS_KEY,)
+                                           region_name="ap-northeast-2")
     return bedrock_embeddings
 
 def vectordbSet():
