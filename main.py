@@ -10,4 +10,4 @@ def chat(question: str):
     result = qa.invoke({
         "question": question
     })
-    return result['answer']
+    return {"message": result['answer']}
