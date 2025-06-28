@@ -234,7 +234,7 @@ def run_ragas_evaluation(output_path, save_results=True):
     Returns:
         dict: 평가 결과
     """
-    excel_path="doc/check_dataset2.xlsx"
+    excel_path="doc/check_dataset.xlsx"
     # 1. 평가 데이터 로드
     df = load_evaluation_data(excel_path)
     if df is None:
