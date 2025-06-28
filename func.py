@@ -9,9 +9,19 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
+# 환경변수 로드
+load_dotenv()
+
+# LangSmith 환경변수 설정
+os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGSMITH_TRACING_V2", "true")
+os.environ["LANGCHAIN_ENDPOINT"] = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
+os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGSMITH_PROJECT", "ai-chatbot")
+if os.getenv("LANGCHAIN_VERIFY_SSL"):
+    os.environ["LANGCHAIN_VERIFY_SSL"] = os.getenv("LANGCHAIN_VERIFY_SSL")
+
 def llmSet():
-    # .env 내용 불러오기
-    load_dotenv(dotenv_path="../.env")
+    # AWS 인증 정보 가져오기
     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
@@ -75,7 +85,7 @@ def chainSet():
     당신은 국민연금에 대해 전문적인 지식을 가진 상담사입니다.
     주어진 컨텍스트를 기반으로 질문에 명확하고 정확하게 답변해 주세요.
     정보가 해당하는 법령도 포함해서 알려주세요.
-    정보를 찾은 PDF페이지 번호도 알려주세요.
+    너무 길지 않게 답변해 주세요.
 
     컨텍스트: {context}
     질문: {question}
